@@ -22,6 +22,7 @@ def predict():
         image_file = request.files["image"]
         image_bytes = image_file.read()
         img = Image.open(io.BytesIO(image_bytes))
+        model = torch.hub.load('C:/Users/GYiji/OneDrive - Versuni/Desktop/yolov5-flask/yolov5', 'custom', 'C:/Users/GYiji/OneDrive - Versuni/Desktop/yolov5-flask/screen300_50.pt', source='local')
         results = model(img, size=640) # reduce size=320 for faster inference
         return results.pandas().xyxy[0].to_json(orient="records")
 
